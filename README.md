@@ -1,19 +1,19 @@
-# JAVA Project - Property management (Work in progress)
+# JAVA Project - Property management (work in progress)
 
 ## Java project with Spring Boot and Spring Security
-A micro service architecture, with :
-- a discovery service (Eureka)
-- an API gateway with JWT and routes filters
-- a authentication module for generate et validate token
-- a business application for simulate a property management software
+A micro services architecture, with :
+- a authentication module for generate et validate token -> prop-mgt-auth
+- a business application for simulate a property management software -> prop-mgt-business-service
+- a discovery service (Eureka) -> prop-mgt-eureka
+- an API gateway with JWT and routes filters -> prop-mgt-gateway
 
 
-## Initialisation
+## Initialization
 
 ### Prerequisites
 - MySQL
 
-### New project :
+### Start new project :
 - Spring Starter Project
 	- Java 17
 	- Maven
@@ -21,7 +21,7 @@ A micro service architecture, with :
 	- Package : com.myorg
 
 ---
-### Java Dependencies
+### Java dependencies
 prop-mgt-auth :
 
 - dependencies
@@ -33,19 +33,26 @@ prop-mgt-auth :
     - spring-boot-devtools
     - mysql-connector-java
     - lombok
-
-	- jjwt-api
-		- version : 0.11.5
+    - jjwt-api
 	- jjwt-impl
-		- version : 0.11.5
 	- jjwt-jackson
-		- version : 0.11.5
+		- jjwt version : 0.11.5
 
+prop-mgt-business-service
+
+- dependencies
+    - spring-boot-starter-data-jpa
+    - spring-boot-starter-data-rest
+    - spring-boot-starter-web
+    - spring-cloud-starter-netflix-eureka-client
+    - spring-boot-devtools
+    - mysql-connector-java
+    - lombok
 
 prop-mgt-eureka
+
 - dependencies
     - spring-cloud-starter-netflix-eureka-server
-
 
 prop-mgt-gateway
 
@@ -58,19 +65,7 @@ prop-mgt-gateway
     - jjwt-api
     - jjwt-impl
     - jjwt-jackson
-
-
-prop-mgt-business-service
-
-- dependencies
-
-    - spring-boot-starter-data-jpa
-    - spring-boot-starter-data-rest
-    - spring-boot-starter-web
-    - spring-cloud-starter-netflix-eureka-client
-    - spring-boot-devtools
-    - mysql-connector-j
-    - lombok
+    	- jjwt version : 0.11.5
 
 
 ---
@@ -80,7 +75,6 @@ prop-mgt-business-service
 
 ---
 ## Test with Postman :
-
 
 ### Requests on Auth service, without Bearer token
 ### Register
@@ -95,7 +89,6 @@ prop-mgt-business-service
     "roles":[{"roleName":"ADMIN"}]
 }
 ```
-
 ### Login
 - POST url : http://localhost:8088/api/v1/auth/login
 - body :
@@ -107,7 +100,6 @@ prop-mgt-business-service
 }
 ```
 
-
 ### Requests on Business service ! Bearer token required !
 ### Get all tenants
 - GET url : http://localhost:8088/api/v1/business/tenants
@@ -117,7 +109,7 @@ prop-mgt-business-service
 - body :
 ```json
 {
-	"lastname" : "Doeee",
+	"lastname" : "Doee",
 	"firstname" : "Jonny",
 	"email" : "doeej@mail.fr",
     "password" : "ANOTHER_PASSWORD"
