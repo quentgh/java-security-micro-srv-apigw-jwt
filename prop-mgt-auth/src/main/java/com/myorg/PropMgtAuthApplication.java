@@ -23,7 +23,6 @@ public class PropMgtAuthApplication {
 		return args -> {
 			accountService.addNewRole(new AppRole(RoleName.ADMIN));
 			accountService.addNewRole(new AppRole(RoleName.USER));
-			accountService.addNewRole(new AppRole(RoleName.HR));
 		};
 	}
 

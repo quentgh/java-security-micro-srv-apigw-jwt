@@ -19,6 +19,6 @@ public class Owner {
 	private Long id;
 	private String lastname;
 	private String firstname;
-	private String mail;
+	private String email;
 	private String password;
 }

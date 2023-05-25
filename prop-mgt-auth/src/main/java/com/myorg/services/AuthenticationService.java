@@ -12,10 +12,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myorg.config.JwtService;
 import com.myorg.dtos.AuthenticationRequestDto;
 import com.myorg.dtos.AuthenticationResponseDto;
 import com.myorg.dtos.RegisterRequestDto;
 import com.myorg.entities.AppUser;
+import com.myorg.repositories.AppUserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,12 +25,12 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class AuthenticationService {
-	private final com.myorg.repositories.AppUserRepository userRepository;
+	private final AppUserRepository userRepository;
 	private final AccountService accountService;
-	private final com.myorg.config.JwtService jwtService;
+	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
 
-	public ResponseEntity<com.myorg.dtos.AuthenticationResponseDto> register(RegisterRequestDto request) {
+	public ResponseEntity<AuthenticationResponseDto> register(RegisterRequestDto request) {
 		if (userRepository.findByEmail(request.getEmail()).isPresent()) {
 			return ResponseEntity.badRequest()
 					.body(AuthenticationResponseDto.builder().message("User already exist").build());
@@ -58,10 +60,12 @@ public class AuthenticationService {
 		var user = userRepository.findByEmail(request.getEmail())
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		var jwtToken = jwtService.generateToken(user);
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Authorization", "Bearer " + jwtToken);
-
-		return ResponseEntity.ok().headers(responseHeaders).body("ok");
+		
+//		HttpHeaders responseHeaders = new HttpHeaders();
+//		responseHeaders.add("Authorization", "Bearer " + jwtToken);
+//		return ResponseEntity.ok().headers(responseHeaders).body("ok");
+		
+		return ResponseEntity.ok().body(jwtToken);
 	}
 
 }

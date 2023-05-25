@@ -10,28 +10,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myorg.entities.Tenant;
-import com.myorg.services.TenantService;
+import com.myorg.entities.Owner;
+import com.myorg.services.OwnerService;
 
 @RestController
 @RequestMapping("api/v1/business")
-public class TenantRestController {
+public class OwnerRestController {
 	@Autowired
-	private TenantService tenantService;
+	private OwnerService ownerService;
 
-	@PostMapping(path = "/addTenant")
-	public void addLessee(@RequestBody Tenant tenant) {
-		tenantService.addTenant(tenant);
+	@PostMapping(path = "/addOwner")
+	public void addOwner(@RequestBody Owner owner) {
+		ownerService.addOwner(owner);
 	}
 
-	@GetMapping(path = "/tenants")
-	public List<Tenant> getLessee() {
-		return tenantService.getTenants();
+	@GetMapping(path = "/owners")
+	public List<Owner> getOwners() {
+		return ownerService.getOwners();
 	}
 
-	@PutMapping(path = "/deleteTenant")
-	public void deleteLessee(@RequestBody Tenant tenant) {
-		tenantService.deleteTenant(tenant);
+	@PutMapping(path = "/deleteOwner")
+	public void deleteOwner(@RequestBody Owner owner) {
+		ownerService.deleteOwner(owner);
 	}
-	
 }
