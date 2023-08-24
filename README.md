@@ -2,7 +2,7 @@
 
 ## Java project with Spring Boot and Spring Security
 A micro services architecture, with :
-- a authentication module for generate et validate token -> prop-mgt-auth
+- an authentication module for generate et validate token -> prop-mgt-auth
 - a business application for simulate a property management software -> prop-mgt-business-service
 - a discovery service (Eureka) -> prop-mgt-eureka
 - an API gateway with JWT and routes filters -> prop-mgt-gateway
